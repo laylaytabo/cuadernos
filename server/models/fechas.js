@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Fechas.associate = function(models) {
     // associations can be defined here
+    Fechas.belongsTo(models.Doctores, {
+      foreignKey: 'codDoctor',
+      onDelete: 'CASCADE'
+    });
   };
   return Fechas;
 };

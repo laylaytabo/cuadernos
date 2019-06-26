@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Turnos.associate = function(models) {
     // associations can be defined here
-    Turnos.belongsTo(models.Cuadernos, {
-      foreignKey: 'idCuadernos',
+    Turnos.belongsTo(models.Fechas, {
+      foreignKey: 'idFecha',
       onDelete: 'CASCADE'
     });
   };
