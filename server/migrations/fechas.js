@@ -14,13 +14,13 @@ module.exports = {
       fechafin: {
         type: Sequelize.DATE
       },
-      codDoctor: {
+      id_doctor: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
           model: 'Doctores',
           key: 'id',
-          as: 'codDoctor',
+          as: 'id_doctor',
         }
       },
       createdAt: {

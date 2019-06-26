@@ -1,34 +1,65 @@
 import model from '../models';
-const{Especialidades} = model;
+
+const{ Especialidades } = model;
+
 class Especialidad{
-    static regist(req, res){
-        if(req.body.nombre == ""  ){
-            res.status(400).send("Todos los campos son obligatorios")
-        }else{
-            const{ nombre} = req.body
-            const { id} = req.params
+
+    static esp(req, res) {
+        const { nombre,sigla,descripcion } = req.body
             return Especialidades
             .create({
-                nombre,
-                idCuaderno
-                
-            }).then(data => res.status(200).send({
+              nombre,
+              sigla,
+              descripcion
+            })
+            .then(serviceData => res.status(200).send ({
                 success: true,
-                message: 'se inserto con exito',
-                data
+                message: 'servicio successfully created',
+                serviceData
             }))
+    }
+    // ruta para poder mostrar todas las especialidades
+    static listEsp(req, res){
+        return Especialidades
+            .findAll()
+            .then(serv => res.status(200).send(serv))
             .catch(error => res.status(400).send(error));
-        }
     }
-    static list(req, res){
-        var id = req.params.id;  
+
+    //ruta para poder mostrar una solo especialidad para que pueda ser actualizado
+    static OneEsp(req, res){                
+       const { id } = req.params
         Especialidades.findAll({
-            where: {idCuaderno: id}
-                 
-            }).then((data) => {
-                res.status(200).json(data);
-            }); 
-    }
-    
+            where: {id: id}
+            //attributes: ['id', ['description', 'descripcion']]
+          }).then((one) => {
+            res.status(200).json(one);
+          });     
+      }
+    //ruta para poder actualizar una especialidad
+    static modify(req, res) {
+        const { nombre,sigla,descripcion } = req.body
+        return Especialidades
+          .findByPk(req.params.id)
+          .then((data) => {
+            data.update({
+                nombre: nombre || data.nombre,
+                sigla: sigla || data.sigla,
+                descripcion: descripcion || data.descripcion
+            })
+            .then(update => {
+              res.status(200).send({
+                message: 'Servcio actualizado',
+                data: {
+                  nombre: nombre || update.nombre,
+                  sigla: sigla || update.sigla,
+                  descripcion: descripcion || update.descripcion
+                }
+              })
+            })
+            .catch(error => res.status(400).send(error));
+          })
+          .catch(error => res.status(400).send(error));
+      }
 }
 export default Especialidad;

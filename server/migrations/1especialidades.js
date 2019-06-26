@@ -12,6 +12,12 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
+      sigla:{
+        type: Sequelize.STRING
+      },
+      descripcion:{
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -26,6 +26,15 @@ module.exports = {
           as: 'idCuaderno',
         }
       },
+      id_espcialidad:{
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Especialidades',
+          key: 'id',
+          as: 'id_espcialidad',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

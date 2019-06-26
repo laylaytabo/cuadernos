@@ -6,9 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Cuadernos.associate = function(models) {
     // associations can be defined here
-    Cuadernos.belongsTo(models.Turnos, {
-      foreignKey: 'idTurno',
-      onDelete: 'CASCADE'
+    Cuadernos.hasMany(models.Doctores, {
+      foreignKey: 'idCuaderno',
     });
   };
   return Cuadernos;
