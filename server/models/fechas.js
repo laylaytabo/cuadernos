@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   Fechas.associate = function(models) {
     // associations can be defined here
     Fechas.hasMany(models.Turnos, {
-      foreignKey: 'idFecha',
+      foreignKey: 'idFechas',
     });
     Fechas.belongsTo(models.Doctores, {
       foreignKey: 'id_doctor',

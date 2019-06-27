@@ -13,7 +13,7 @@ module.exports = {
 
       },
       diasAten:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       turno: {
         type: Sequelize.STRING

@@ -1,9 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Turnos = sequelize.define('Turnos', {
+    cantiFicha: DataTypes.INTEGER,
+    diasAten: DataTypes.STRING,
     turno: DataTypes.STRING,
-    sala: DataTypes.STRING,
-    idFecha: { 
+    idFechas: { 
       type: DataTypes.INTEGER,
       allowNull:{
         args: false,
@@ -13,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Turnos.associate = function(models) {
     // associations can be defined here
     Turnos.belongsTo(models.Fechas, {
-      foreignKey: 'idFecha',
+      foreignKey: 'idFechas',
       onDelete: 'CASCADE'
     });
   };
