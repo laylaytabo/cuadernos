@@ -44,5 +44,24 @@ class Turno{
             res.status(200).json(data);
         })
     }
+    static deleteTurno(req, res) {
+        const { id } = req.params
+        return Turnos
+          .findByPk(id)
+          .then(turno => {
+            if(!turno) {
+              return res.status(400).send({
+              message: 'NO hay nada que eliminar',
+              });
+            }
+            return turno
+              .destroy()
+              .then(() => res.status(200).send({
+                message: 'Se elimino con exito'
+              }))
+              .catch(error => res.status(400).send(error));
+        })
+        .catch(error => res.status(400).send(error))
+    }
 }
 export default Turno;

@@ -27,6 +27,7 @@ export default (app) => {
     app.post('/api/turnos/:idFechas', Turno.regist);
     app.get('/api/ListTurnos', Turno.listTurnos);
     app.get('/api/oneTurno/:id', Turno.OneTurno); // esta ruta trae todos los turnos segun fecha
+    app.delete('/api/delete/:id', Turno.deleteTurno);
     //servicios
     app.post('/api/especialidad', Especialidad.esp)
     app.get('/api/especialidad', Especialidad.listEsp)
