@@ -1,6 +1,9 @@
 import model from '../models';
 
 const{ Especialidades } = model;
+const{ Doctores } = model;
+const{ Fechas } = model;
+const{ Turnos } = model
 
 class Especialidad{
 
@@ -61,5 +64,25 @@ class Especialidad{
           })
           .catch(error => res.status(400).send(error));
       }
+
+      
+      static ListEspTurnos(req, res){
+        var data = req.params;
+        Especialidades.findAll({
+            where : { nombre : data.nombre },
+          //attributes: [],
+            include: [
+                { model: Doctores, attributes: ['id','nombre'], 
+                include:[
+                    { model: Fechas, attributes:['id'],
+                  include:[                    
+                    { model:Turnos,
+                     where:{ diasAten : data.dia, turno:data.turno }}
+                  ]}                
+            ]}]
+        }).then(data => {
+          res.status(200).send(data)
+        })
+    }
 }
 export default Especialidad;

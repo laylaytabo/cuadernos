@@ -19,20 +19,28 @@ export default (app) => {
 
     //doctor
     app.post('/api/doctor/:idCuaderno', Doctor.regist);
+    app.get('/api/Alldoctor', Doctor.ListDoctores)
     app.get('/api/doctores/:id', Doctor.list);
     app.get('/api/IdDoct/:id', Doctor.listDoc);
     app.post('/api/modifyDocCuadern/:id', Doctor.modifyDoctCuaderno); //ruta para modificar
+
+    app.get('/api/doctTurnos/:id', Doctor.doctorTurnos); // ruta para poder mostrar de los doctore  su turno
 
     //turnos
     app.post('/api/turnos/:idFechas', Turno.regist);
     app.get('/api/ListTurnos', Turno.listTurnos);
     app.get('/api/oneTurno/:id', Turno.OneTurno); // esta ruta trae todos los turnos segun fecha
     app.delete('/api/delete/:id', Turno.deleteTurno);
+
+    app.get('/api/ListAll/:dia/:turno', Turno.listT); // Esta ruta trae mas de una tabla
+    
     //servicios
     app.post('/api/especialidad', Especialidad.esp)
     app.get('/api/especialidad', Especialidad.listEsp)
     app.get('/api/EspOne/:id', Especialidad.OneEsp)
     app.post('/api/updateEsp/:id', Especialidad.modify)
+
+    app.get( '/api/espTurno/:nombre/:dia/:turno', Especialidad.ListEspTurnos ); //esta ruta muestra todas las especialidades y sus turnos
 
     //fechas
     app.post('/api/fechas/:id_doctor', Fecha.fechaPOst );

@@ -1,6 +1,8 @@
 import model from '../models';
 
-const{Doctores} = model;
+const{ Doctores } = model;
+const{ Fechas } = model;
+const{ Turnos } = model
 const{ Especialidades } = model;
 
 class Doctor{
@@ -33,6 +35,13 @@ class Doctor{
                 })
             
         }
+    }
+    //mostrar toos los doctores
+    static ListDoctores(req, res){
+        return Doctores
+        .findAll()
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
     }
     //ruta para sacar doctor segun idCuaderno
     static list(req, res){
@@ -93,9 +102,23 @@ class Doctor{
               })
               .catch(error => res.status(400).send(error));
         })
-
-       
       }
+
+      //
+      static doctorTurnos(req, res){
+        var id = req.params.id;
+        Doctores.findAll({
+            where : { id : id },
+          //attributes: [],
+            include: [
+                { model: Fechas, attributes: ['id'], 
+                include:[
+                    { model: Turnos,}                
+            ]}]
+        }).then(users => {
+          res.status(200).send(users)
+        })
+    }
     
 }
 export default Doctor;

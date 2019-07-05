@@ -1,6 +1,9 @@
 import model from '../models'
 
 const{ Turnos } = model
+const{ Fechas } = model;
+const{Doctores} = model;
+const{ Especialidades } = model;
 
 class Turno{
     static regist(req, res){
@@ -62,6 +65,21 @@ class Turno{
               .catch(error => res.status(400).send(error));
         })
         .catch(error => res.status(400).send(error))
+    }
+    //lista de un turno sus fechas doctor y especialidad
+    static listT(req, res){
+        var data = req.params;
+        Turnos.findAll({
+            where : { diasAten : data.dia, turno: data.turno },
+          //attributes: [],
+            include: [
+                { model: Fechas, attributes: ['id'], 
+                include:[
+                    { model: Doctores,}                
+            ]}]
+        }).then(users => {
+          res.status(200).send(users)
+        })
     }
 }
 export default Turno;
