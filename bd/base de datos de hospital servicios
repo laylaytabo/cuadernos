@@ -8,5 +8,6 @@ sequelize model:create --name Especialidades --attributes nombre:string,horarios
 
 sequelize model:create --name Fechas --attributes fechaini:date,fechafin:date,codDoctor:integer
 
+sequelize model:create --name Consulta_especilaida --attributes nombre:string,sigla:string,descripcion:string,id_especialidad:integer
 
 

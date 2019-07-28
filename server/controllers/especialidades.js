@@ -66,23 +66,23 @@ class Especialidad{
       }
 
       
-      static ListEspTurnos(req, res){
-        var data = req.params;
-        Especialidades.findAll({
-            where : { nombre : data.nombre },
-          //attributes: [],
-            include: [
-                { model: Doctores, attributes: ['id','nombre'], 
-                include:[
-                    { model: Fechas, attributes:['id'],
-                  include:[                    
-                    { model:Turnos,
-                     where:{ diasAten : data.dia, turno:data.turno }}
-                  ]}                
-            ]}]
-        }).then(data => {
-          res.status(200).send(data)
-        })
+    static ListEspTurnos(req, res){
+      var data = req.params;
+      Especialidades.findAll({
+          where : { nombre : data.nombre },
+        //attributes: [],
+          include: [
+              { model: Doctores, attributes: ['id','nombre'], 
+              include:[
+                  { model: Fechas, attributes:['id'],
+                include:[                    
+                  { model:Turnos,
+                   where:{ diasAten : data.dia, turno:data.turno }}
+                ]}                
+          ]}]
+      }).then(data => {
+        res.status(200).send(data)
+      })
     }
 }
 export default Especialidad;

@@ -5,26 +5,29 @@ const{ Fechas } = model;
 const{ Turnos } = model
 const{ Especialidades } = model;
 
+const { Consulta_especilaida } = model
+
+
 class Doctor{
     static regist(req, res){
         if(req.body.nombre == "" || req.body.especialidad == "" || req.body.turno == "" || req.body.sala == "" ){
             res.status(400).send("Todos los campos son obligatorios")
         }else{
-            Especialidades.findAll({
+            Consulta_especilaida.findAll({
                 where: {nombre: req.body.especialidad}
             })
             .then((data) => {
                 var id = data[0].id
                 const{ nombre,TDoctor, enfermera} = req.body
-                const { idCuaderno} = req.params
-                var id_espcialidad = id;
+                const { idCuaderno } = req.params
+                var id_ConsultaEspecialidad = id;
                 return Doctores
                 .create({
                     nombre,
                     TDoctor,
                     enfermera,
                     idCuaderno,
-                    id_espcialidad /// esta cosa llenar cuando se seleccione la especilaidad
+                    id_ConsultaEspecialidad /// esta cosa llenar cuando se seleccione la especilaidad
 
                 }).then(data => res.status(200).send({
                     success: true,
@@ -49,7 +52,7 @@ class Doctor{
         Doctores.findAll({
             where: {idCuaderno: id},
             include:[
-                {model:Especialidades, attributes:['nombre']}
+                {model:Consulta_especilaida, attributes:['nombre']}
             ]               
             }).then((data) => {
                 res.status(200).json(data);

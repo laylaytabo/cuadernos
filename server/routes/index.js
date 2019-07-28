@@ -3,6 +3,7 @@ import Doctor from '../controllers/doctores'
 import Turno from '../controllers/turnos'
 import Especialidad from '../controllers/especialidades'
 import Fecha from '../controllers/fechas'
+import ConsultaEsp from '../controllers/especialidad_consulta'
 
 export default (app) => {
 
@@ -30,7 +31,7 @@ export default (app) => {
     app.post('/api/turnos/:idFechas', Turno.regist);
     app.get('/api/ListTurnos', Turno.listTurnos);
     app.get('/api/oneTurno/:id', Turno.OneTurno); // esta ruta trae todos los turnos segun fecha
-    app.delete('/api/delete/:id', Turno.deleteTurno);
+    app.get('/api/delete/:id', Turno.deleteTurno);
 
     app.get('/api/ListAll/:dia/:turno', Turno.listT); // Esta ruta trae mas de una tabla
     
@@ -49,5 +50,12 @@ export default (app) => {
     app.get('/api/oneFecha/:id', Fecha.oneFecha); //ruta para sacar una fecha segun id
     app.post('/api/updateFecha/:id', Fecha.UpdateFecha); //ruta para poder actualizar fecha
 
-    
+    //consulta especialidad
+
+    app.post('/api/reg_consEsp/:id_especialidad' , ConsultaEsp.ConsEspecialidad);
+    app.get('/api/list_consEsp', ConsultaEsp.listEspCons);
+    app.get('/api/OneEspCons/:id', ConsultaEsp.OneEspCons);// ruta para poder mostrar una sola especialidad para que pueda ser actulizado
+    app.get('/api/list_EspCons/:id_especialidad', ConsultaEsp.list_EspCons); // esta rusta es para poder mostrar una lista de especialdades_consulta segun especialidad
+    app.post('/api/modifyEspCons/:id', ConsultaEsp.modifyEspCons); // esta ruta sirve para poder actualizar ne la tabla especialidad consulta
+    app.get('/api/Esp_Turnos/:nombre/:dia/:turno',ConsultaEsp.List_Esp_Turnos)
 }

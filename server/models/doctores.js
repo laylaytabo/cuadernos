@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         args: false,
       }
     },
-    id_espcialidad:DataTypes.INTEGER
+    id_ConsultaEspecialidad:DataTypes.INTEGER
   }, {});
   Doctores.associate = function(models) {
     // associations can be defined here
@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'idCuaderno',
       onDelete: 'CASCADE'
     });
-    Doctores.belongsTo(models.Especialidades, {
-      foreignKey: 'id_espcialidad',
+    Doctores.belongsTo(models.Consulta_especilaida, {
+      foreignKey: 'id_ConsultaEspecialidad',
       onDelete: 'CASCADE'
     });
   };

@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Especialidades.associate = function(models) {
     // associations can be defined here
-    Especialidades.hasMany(models.Doctores, {
-      foreignKey: 'id_espcialidad',
+    Especialidades.hasMany(models.Consulta_especilaida, {
+      foreignKey: 'id_especialidad',
     });
   };
   return Especialidades;

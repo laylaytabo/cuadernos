@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Doctores', {
+    return queryInterface.createTable('Consulta_especilaidas', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,28 +11,19 @@ module.exports = {
       nombre: {
         type: Sequelize.STRING
       },
-      TDoctor: {
+      sigla: {
         type: Sequelize.STRING
       },
-      enfermera:{
+      descripcion: {
         type: Sequelize.STRING
       },
-      idCuaderno:{
+      id_especialidad: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Cuadernos',
+          model: 'Especialidades',
           key: 'id',
-          as: 'idCuaderno',
-        }
-      },
-      id_ConsultaEspecialidad:{
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Consulta_especilaidas',
-          key: 'id',
-          as: 'id_ConsultaEspecialidad',
+          as: 'id_especialidad',
         }
       },
       createdAt: {
@@ -46,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Doctores');
+    return queryInterface.dropTable('Consulta_especilaidas');
   }
 };
