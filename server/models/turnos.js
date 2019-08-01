@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Turnos.associate = function(models) {
     // associations can be defined here
+    Turnos.hasMany(models.horas_of_truno, {
+      foreignKey: 'id_turnos',
+    });
     Turnos.belongsTo(models.Fechas, {
       foreignKey: 'idFechas',
       onDelete: 'CASCADE'

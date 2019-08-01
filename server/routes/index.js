@@ -5,6 +5,8 @@ import Especialidad from '../controllers/especialidades'
 import Fecha from '../controllers/fechas'
 import ConsultaEsp from '../controllers/especialidad_consulta'
 
+import Horas_Turnos from '../controllers/horas_trunos'
+
 export default (app) => {
 
     app.get('/api', (req, res) => res.status(200).send({
@@ -34,6 +36,13 @@ export default (app) => {
     app.get('/api/delete/:id', Turno.deleteTurno);
 
     app.get('/api/ListAll/:dia/:turno', Turno.listT); // Esta ruta trae mas de una tabla
+
+    //horas turnos
+    app.post('/api/hora_turno/:id_turnos',Horas_Turnos.regHorasTurnos);
+    app.get('/api/horas_turno',Horas_Turnos.listHoras_truno );
+    app.get('/api/listHoras_turno/:id_turnos',Horas_Turnos.horasTurnos_list)
+    app.get('/api/delete_horas_turnos/:id', Horas_Turnos.deleteHoras)
+    app.post('/api/Update_Hora/:id',Horas_Turnos.Update_Hora);
     
     //servicios
     app.post('/api/especialidad', Especialidad.esp)
@@ -58,4 +67,6 @@ export default (app) => {
     app.get('/api/list_EspCons/:id_especialidad', ConsultaEsp.list_EspCons); // esta rusta es para poder mostrar una lista de especialdades_consulta segun especialidad
     app.post('/api/modifyEspCons/:id', ConsultaEsp.modifyEspCons); // esta ruta sirve para poder actualizar ne la tabla especialidad consulta
     app.get('/api/Esp_Turnos/:nombre/:dia/:turno',ConsultaEsp.List_Esp_Turnos)
+
+    
 }

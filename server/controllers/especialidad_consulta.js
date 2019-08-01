@@ -4,7 +4,8 @@ const { Consulta_especilaida } = model
 
 const{ Doctores } = model;
 const{ Fechas } = model;
-const{ Turnos } = model
+const{ Turnos } = model;
+const { horas_of_truno } = model
 
 class ConsultaEsp{
     static ConsEspecialidad(req,res){
@@ -87,7 +88,10 @@ class ConsultaEsp{
                     { model: Fechas, attributes:['id'],
                   include:[                    
                     { model:Turnos,
-                     where:{ diasAten : data.dia, turno:data.turno }}
+                     where:{ diasAten : data.dia, turno:data.turno }, 
+                     include:[
+                      {model: horas_of_truno}]
+                    }
                   ]}                
             ]}]
         }).then(data => {

@@ -10,4 +10,4 @@ sequelize model:create --name Fechas --attributes fechaini:date,fechafin:date,co
 
 sequelize model:create --name Consulta_especilaida --attributes nombre:string,sigla:string,descripcion:string,id_especialidad:integer
 
-
+sequelize model:create --name horas_of_truno --attributes estado:boolean,hora:string,id_turnos:integer

@@ -57,8 +57,8 @@ class Fecha {
         const { fechaini,fechafin } = req.body
 
         return Fechas
-          .findByPk(req.params.id)
-          .then((data) => {
+        .findByPk(req.params.id)
+        .then((data) => {
             data.update({
                 fechaini: fechaini || data.fechaini,
                 fechafin: fechafin || data.fechafin
@@ -73,10 +73,9 @@ class Fecha {
               })
             })
             .catch(error => res.status(400).send(error));
-          })
-          .catch(error => res.status(400).send(error));
-       
-      }
+        })
+        .catch(error => res.status(400).send(error)); 
+    }
 }
 
 
