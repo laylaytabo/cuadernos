@@ -28,6 +28,7 @@ export default (app) => {
     app.post('/api/modifyDocCuadern/:id', Doctor.modifyDoctCuaderno); //ruta para modificar
 
     app.get('/api/doctTurnos/:id', Doctor.doctorTurnos); // ruta para poder mostrar de los doctore  su turno
+    app.get('/api/docAllData/:id', Doctor.docAllData); 
 
     //turnos
     app.post('/api/turnos/:idFechas', Turno.regist);
