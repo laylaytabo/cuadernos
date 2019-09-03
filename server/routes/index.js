@@ -45,7 +45,7 @@ export default (app) => {
     app.get('/api/delete_horas_turnos/:id', Horas_Turnos.deleteHoras)
     app.post('/api/Update_Hora/:id',Horas_Turnos.Update_Hora);
     
-    //servicios
+    //especialidad
     app.post('/api/especialidad', Especialidad.esp)
     app.get('/api/especialidad', Especialidad.listEsp)
     app.get('/api/EspOne/:id', Especialidad.OneEsp)
@@ -68,6 +68,6 @@ export default (app) => {
     app.get('/api/list_EspCons/:id_especialidad', ConsultaEsp.list_EspCons); // esta rusta es para poder mostrar una lista de especialdades_consulta segun especialidad
     app.post('/api/modifyEspCons/:id', ConsultaEsp.modifyEspCons); // esta ruta sirve para poder actualizar ne la tabla especialidad consulta
     app.get('/api/Esp_Turnos/:nombre/:dia/:turno',ConsultaEsp.List_Esp_Turnos)
-
+    app.get('/api/nombreConsulta_especilidad/:nombre', ConsultaEsp.nombreConsulta_especilidad)// esta ruta es para poder sacar el id de una consulta especialidad por su nombre
     
 }

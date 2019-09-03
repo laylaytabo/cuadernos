@@ -98,6 +98,17 @@ class ConsultaEsp{
           res.status(200).send(data)
         })
     }
+
+    //ruta para poder sacar el id de una especilidad por su nombre
+    static nombreConsulta_especilidad(req, res){                
+      const { nombre } = req.params
+      Consulta_especilaida.findAll({
+          where: {nombre : nombre}
+           //attributes: ['id', ['description', 'descripcion']]
+      }).then((one) => {
+        res.status(200).json(one);
+      });     
+  }
 }
 
 export default ConsultaEsp;
