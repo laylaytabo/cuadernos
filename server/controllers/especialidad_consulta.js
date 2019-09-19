@@ -9,20 +9,48 @@ const { horas_of_truno } = model
 
 class ConsultaEsp{
     static ConsEspecialidad(req,res){
-        const { nombre,sigla,descripcion } = req.body
-        const { id_especialidad } = req.params
-        return Consulta_especilaida
-        .create({
-            nombre,
-            sigla,
-            descripcion,
-            id_especialidad
-        })
-        .then(serviceData => res.status(200).send ({
-            success: true,
-            message: 'successfully created',
-            serviceData
-        }))
+      console.log(req.body, "  <<<<<<<<<<<<<<<< sadasd")
+      if(req.body.nombre == "" || req.body.sigla == ""){
+        if(req.body.nombre == ""){
+          res.status(400).json({
+            success:false,
+            msg:"Introdusca un nombre por favor"
+          })
+        }else if(req.body.sigla == ""){
+          res.status(400).json({
+            success:false,
+            msg:"Introdusca Sigla por favor"
+          })
+        }
+      }else{
+        Consulta_especilaida.findAll({
+            where: {nombre : req.body.nombre}
+             //attributes: ['id', ['description', 'descripcion']]
+        }).then((data) => {
+         if (data == ""){ // verificar si existe nombre 
+          const { nombre,sigla,descripcion } = req.body
+          const { id_especialidad } = req.params
+          return Consulta_especilaida
+          .create({
+              nombre,
+              sigla,
+              descripcion,
+              id_especialidad
+          })
+          .then(serviceData => res.status(200).send ({
+              success: true,
+              msg: 'successfully created',
+              serviceData
+          }))
+         }else{
+          res.status(400).json({
+            success:false,
+            msg:"Ese nombre ya existe"
+          })
+         }
+        }); 
+        
+      }
     }
     static listEspCons(req, res){
         return Consulta_especilaida
