@@ -8,19 +8,38 @@ class Cuaderno{
                 message:"Todos los campos son obligatorios"
             })
         }else{
-            const{ titulo,grupo} = req.body
-            return Cuadernos
-            .create({
-                
-                titulo,
-                grupo,
-                
-            }).then(data => res.status(200).send({
-                success: true,
-                message: 'Se inserto con exito',
-                data
-            }))
-            .catch(error => res.status(400).send(error));
+            Cuadernos.findOne({
+                where:{
+                    titulo: req.body.titulo
+                }
+            }).then(cuader =>{
+                if(cuader != null){
+                    console.log("Fallo >> El Cuaderno ya existe...!")
+                    res.status(400).send({
+                        success:false,
+                        message:'Fallo >> El Cuaderno ya existe...!'
+                    })
+                    return;
+                }else{
+                    const{ titulo,grupo} = req.body
+                    return Cuadernos
+                    
+            
+                    .create({
+                        
+                        titulo,
+                        grupo,
+                        
+                    }).then(data => res.status(200).send({
+                        success: true,
+                        message: 'Se inserto con exito',
+                        data
+                    }))
+                    .catch(error => res.status(400).send(error));
+
+                }
+            })
+           
         }
     }
     //ruta para sacar todos los cuadernos
@@ -53,6 +72,7 @@ class Cuaderno{
                 })
                 .then(update => {
                     res.status(200).send({
+                        success: true,
                       message: 'Cuaderno actualizado',
                       data: {                       
                         titulo: titulo || update.titulo,
@@ -60,7 +80,10 @@ class Cuaderno{
                       }
                     })
                 })
-                .catch(error => res.status(400).send(error));
+                .catch(error => res.status(400).send({
+                    success: false,
+                    message: 'Actualizacion Fallida',
+                    error}));
             })
             .catch(error => res.status(400).send(error));
     }
