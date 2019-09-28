@@ -38,12 +38,16 @@ export default (app) => {
 
     app.get('/api/ListAll/:dia/:turno', Turno.listT); // Esta ruta trae mas de una tabla
 
+    app.get('/api/one_turno_dia/:dia', Turno.one_turno_dia);
+
     //horas turnos
     app.post('/api/hora_turno/:id_turnos',Horas_Turnos.regHorasTurnos);
     app.get('/api/horas_turno',Horas_Turnos.listHoras_truno );
     app.get('/api/listHoras_turno/:id_turnos',Horas_Turnos.horasTurnos_list)
     app.get('/api/delete_horas_turnos/:id', Horas_Turnos.deleteHoras)
     app.post('/api/Update_Hora/:id',Horas_Turnos.Update_Hora);
+
+    
     
     //especialidad
     app.post('/api/especialidad', Especialidad.esp)

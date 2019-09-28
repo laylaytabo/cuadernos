@@ -20,7 +20,7 @@ class Especialidad{
             nombre: req.body.nombre 
           }
         }).then(nombre =>{
-          if(!nombre){
+          if(nombre != null){
             console.log("Fallo -> La especialidad ya existe!")
             res.status(400).json({
               success: false,
