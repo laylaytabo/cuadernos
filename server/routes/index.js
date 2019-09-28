@@ -53,6 +53,8 @@ export default (app) => {
     app.get('/api/EspOne/:id', Especialidad.OneEsp)
     app.post('/api/updateEsp/:id', Especialidad.modify)
 
+    app.get('/api/especialidad_nombre/:nombre', Especialidad.especialidad_nombre)
+
     app.get( '/api/espTurno/:nombre/:dia/:turno', Especialidad.ListEspTurnos ); //esta ruta muestra todas las especialidades y sus turnos
 
     //fechas

@@ -47,10 +47,10 @@ class Especialidad{
     }
     // ruta para poder mostrar todas las especialidades
     static listEsp(req, res){
-        return Especialidades
-            .findAll()
-            .then(serv => res.status(200).send(serv))
-            .catch(error => res.status(400).send(error));
+      return Especialidades
+      .findAll()
+      .then(serv => res.status(200).send(serv))
+      .catch(error => res.status(400).send(error));
     }
 
     //ruta para poder mostrar una solo especialidad para que pueda ser actualizado
@@ -104,6 +104,15 @@ class Especialidad{
                    where:{ diasAten : data.dia, turno:data.turno }}
                 ]}                
           ]}]
+      }).then(data => {
+        res.status(200).send(data)
+      })
+    }
+    static especialidad_nombre(req, res){
+      var data = req.params;
+      Especialidades.findAll({
+        where : { nombre : data.nombre },
+        
       }).then(data => {
         res.status(200).send(data)
       })
