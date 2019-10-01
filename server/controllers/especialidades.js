@@ -8,7 +8,27 @@ const{ Turnos } = model
 class Especialidad{
 
     static esp(req, res) {
-        const { nombre,sigla,descripcion } = req.body
+      if(!req.body.nombre || !req.body.sigla || !req.body.descripcion){
+        res.status(400).send({
+          success: false,
+          message:'Todos los campos son obligados.'
+        })
+        console.log(" Todos los campos son Obligatorios")
+      }else{
+        Especialidades.findOne({
+          where:{
+            nombre: req.body.nombre 
+          }
+        }).then(nombre =>{
+          if(nombre != null){
+            console.log("Fallo -> La especialidad ya existe!")
+            res.status(400).json({
+              success: false,
+              message:"Fallo -> La especialidad ya existe!"
+            });
+          return;
+          }else{
+            const { nombre,sigla,descripcion } = req.body
             return Especialidades
             .create({
               nombre,
@@ -17,16 +37,20 @@ class Especialidad{
             })
             .then(serviceData => res.status(200).send ({
                 success: true,
-                message: 'servicio successfully created',
+                message: 'Servicio Creado Correctamente',
                 serviceData
             }))
+          }
+        })
+      }
+        
     }
     // ruta para poder mostrar todas las especialidades
     static listEsp(req, res){
-        return Especialidades
-            .findAll()
-            .then(serv => res.status(200).send(serv))
-            .catch(error => res.status(400).send(error));
+      return Especialidades
+      .findAll()
+      .then(serv => res.status(200).send(serv))
+      .catch(error => res.status(400).send(error));
     }
 
     //ruta para poder mostrar una solo especialidad para que pueda ser actualizado
@@ -80,6 +104,15 @@ class Especialidad{
                    where:{ diasAten : data.dia, turno:data.turno }}
                 ]}                
           ]}]
+      }).then(data => {
+        res.status(200).send(data)
+      })
+    }
+    static especialidad_nombre(req, res){
+      var data = req.params;
+      Especialidades.findAll({
+        where : { nombre : data.nombre },
+        
       }).then(data => {
         res.status(200).send(data)
       })

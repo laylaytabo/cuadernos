@@ -6,6 +6,8 @@ import Fecha from '../controllers/fechas'
 import ConsultaEsp from '../controllers/especialidad_consulta'
 
 import Horas_Turnos from '../controllers/horas_trunos'
+import Doctor_consulta from '../controllers/especialidad_doctor'
+
 
 export default (app) => {
 
@@ -38,18 +40,24 @@ export default (app) => {
 
     app.get('/api/ListAll/:dia/:turno', Turno.listT); // Esta ruta trae mas de una tabla
 
+    app.get('/api/one_turno_dia/:dia', Turno.one_turno_dia);
+
     //horas turnos
     app.post('/api/hora_turno/:id_turnos',Horas_Turnos.regHorasTurnos);
     app.get('/api/horas_turno',Horas_Turnos.listHoras_truno );
     app.get('/api/listHoras_turno/:id_turnos',Horas_Turnos.horasTurnos_list)
     app.get('/api/delete_horas_turnos/:id', Horas_Turnos.deleteHoras)
     app.post('/api/Update_Hora/:id',Horas_Turnos.Update_Hora);
+
+    
     
     //especialidad
     app.post('/api/especialidad', Especialidad.esp)
     app.get('/api/especialidad', Especialidad.listEsp)
     app.get('/api/EspOne/:id', Especialidad.OneEsp)
     app.post('/api/updateEsp/:id', Especialidad.modify)
+
+    app.get('/api/especialidad_nombre/:nombre', Especialidad.especialidad_nombre)
 
     app.get( '/api/espTurno/:nombre/:dia/:turno', Especialidad.ListEspTurnos ); //esta ruta muestra todas las especialidades y sus turnos
 
@@ -69,5 +77,10 @@ export default (app) => {
     app.post('/api/modifyEspCons/:id', ConsultaEsp.modifyEspCons); // esta ruta sirve para poder actualizar ne la tabla especialidad consulta
     app.get('/api/Esp_Turnos/:nombre/:dia/:turno',ConsultaEsp.List_Esp_Turnos)
     app.get('/api/nombreConsulta_especilidad/:nombre', ConsultaEsp.nombreConsulta_especilidad)// esta ruta es para poder sacar el id de una consulta especialidad por su nombre
-    
+
+    //ruta para consulta doctor
+    app.post('/api/reg_doctor_especialidad/:id_especialidad', Doctor_consulta.reg_doctor_especialidad)
+    app.get('/api/list_doctores_especialidad', Doctor_consulta.list_doctores_especialidad)
+    app.get('/api/only_list_doctores_especialidad/:id_especialidad', Doctor_consulta.only_list_doctores_especialidad)
+    app.get('/api/doctor_area/:id_medico', Doctor_consulta.doctor_area)
 }

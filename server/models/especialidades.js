@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     Especialidades.hasMany(models.Consulta_especilaida, {
       foreignKey: 'id_especialidad',
     });
+    Especialidades.hasMany(models.especialidad_doctor, {
+      foreignKey: 'id_especialidad',
+    });
   };
   return Especialidades;
 };

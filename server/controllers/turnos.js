@@ -10,24 +10,40 @@ class Turno{
         if( req.body.cantiFicha == "" || req.body.diasAten == "" || req.body.turno == "" ) {
             res.status(400).send("Todos los campos son obligatorios")
         }else{
-            const{ cantiFicha,diasAten, turno } = req.body
-            const{ idFechas }= req.params
             return Turnos
-            .create({
+            .findAll({
+                where:{ idFechas: req.params.idFechas, diasAten: req.body.diasAten }
+            })
+            .then(data => {
+                console.log(data, "  <<<<<<<<<<<<<<<<<<<< esto")
+                 if(data == ""){
+                    const{ cantiFicha,diasAten, turno } = req.body
+                    const{ idFechas }= req.params
+                    return Turnos
+                    .create({
+        
+                        cantiFicha,
+                        diasAten, 
+                        turno,
+                        idFechas
+        
+                    }).then(data => res.status(200).send({
+        
+                        success: true,
+                        message: 'se inserto con exito',
+                        data
+        
+                    }))
+                    .catch(error => res.status(400).send(error));          
+                }else{
+                    res.status(400).json({
+                        success:false,
+                        message:"Ese dia "+req.body.diasAten+" ya esta registrado"
+                    })
+                }
+            })
 
-                cantiFicha,
-                diasAten, 
-                turno,
-                idFechas
-
-            }).then(data => res.status(200).send({
-
-                success: true,
-                message: 'se inserto con exito',
-                data
-
-            }))
-            .catch(error => res.status(400).send(error));
+            
         }
     }
     
@@ -80,6 +96,15 @@ class Turno{
         }).then(users => {
           res.status(200).send(users)
         })
+    }
+    static one_turno_dia(req, res){
+        const { dia } = req.params
+        return Turnos
+        .findAll({
+            where:{ diasAten: dia }
+        })
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
     }
 }
 export default Turno;
