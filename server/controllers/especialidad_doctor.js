@@ -69,7 +69,7 @@ class Doctor_consulta{
                                     })
                                     .then(serviceData => res.status(200).send ({
                                         success: true,
-                                        message: 'successfully created',
+                                        msg: 'successfully created',
                                         serviceData
                                     }))
                                 }
@@ -86,6 +86,13 @@ class Doctor_consulta{
                        
                     }
                 }
+            })
+            .catch(error => {
+                res.status(500).json({
+                    success:false,
+                    msg:"algo paso con el servidor, o no se esta pudiendo acceder a la ruta",
+                    error
+                })
             })
         }
     }
