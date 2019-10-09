@@ -8,7 +8,7 @@ const{ Turnos } = model
 class Especialidad{
 
     static esp(req, res) {
-      if(!req.body.nombre || !req.body.sigla || !req.body.descripcion){
+      if(!req.body.nombre || !req.body.descripcion){
         res.status(400).send({
           success: false,
           message:'Todos los campos son obligados.'
