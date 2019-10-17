@@ -15,7 +15,7 @@ class Cuaderno{
             }).then(cuader =>{
                 if(cuader != null){
                     console.log("Fallo >> El Cuaderno ya existe...!")
-                    res.status(400).send({
+                    res.status(400).json({
                         success:false,
                         message:'Fallo >> El Cuaderno ya existe...!'
                     })
@@ -30,7 +30,7 @@ class Cuaderno{
                         titulo,
                         grupo,
                         
-                    }).then(data => res.status(200).send({
+                    }).then(data => res.status(200).json({
                         success: true,
                         message: 'Se inserto con exito',
                         data

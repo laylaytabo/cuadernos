@@ -7,23 +7,24 @@ const{ Especialidades } = model
 
 class Doctor_consulta{
     static reg_doctor_especialidad(req,res){
-        if( req.body.nombre_doctor == "" || req.body.ci == "" || isNaN(req.body.ci)){
+        if( req.body.nombre_doctor == "" || req.body.ci == "" /*|| isNaN(req.body.ci)*/){
             if(req.body.nombre_doctor == ""){
                 res.status(400).json({
                     success: false,
-                    msg: "Inserte nombre del doctor"
+                    msg: "Inserte Nombre del Médico"
                 })
             }else if(req.body.ci == "") {
                 res.status(400).json({
                     success: false,
-                    msg: "Inserte C.I del doctor"
+                    msg: "Seleccione  C.I del Médico"
                 })
-            }else if (isNaN(req.body.ci)){
+            }
+            /*else if (isNaN(req.body.ci)){
                 res.status(400).json({
                     success: false,
                     msg: "C.I solo puede contener numeros"
                 })
-            }
+            }*/
         }else{
             //const { req. }
             fetch('http://localhost:3600/api/get_medico_ci/'+req.body.ci)
@@ -69,7 +70,7 @@ class Doctor_consulta{
                                     })
                                     .then(serviceData => res.status(200).send ({
                                         success: true,
-                                        msg: 'successfully created',
+                                        msg: 'Datos Incresados Correctament',
                                         serviceData
                                     }))
                                 }

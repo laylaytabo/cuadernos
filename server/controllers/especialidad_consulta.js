@@ -14,12 +14,12 @@ class ConsultaEsp{
         if(req.body.nombre == ""){
           res.status(400).json({
             success:false,
-            msg:"Introdusca un nombre por favor"
+            msg:"Introdusca un nombre de Especialidad"
           })
         }else if(req.body.sigla == ""){
           res.status(400).json({
             success:false,
-            msg:"Introdusca Sigla por favor"
+            msg:"Introdusca Sigla  Especialidad"
           })
         }
       }else{
@@ -39,7 +39,7 @@ class ConsultaEsp{
           })
           .then(serviceData => res.status(200).send ({
               success: true,
-              msg: 'successfully created',
+              msg: 'Datos Incresados Correctamente',
               serviceData
           }))
          }else{

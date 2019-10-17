@@ -12,10 +12,10 @@ class Horas_Turnos{
             hora,
             id_turnos
         })
-        .then(data => res.status(200).send({
+        .then(data => res.status(200).json({
 
             success: true,
-            message: 'se inserto con exito',
+            message: 'Se inserto con exito',
             data
 
         }))
@@ -48,8 +48,9 @@ class Horas_Turnos{
               }
               return data
                 .destroy()
-                .then(() => res.status(200).send({
-                  message: 'Successfully deleted'
+                .then(() => res.status(200).json({
+                  success:true,
+                  message: 'Elimanadas Correctamente'
                 }))
                 .catch(error => res.status(400).send(error));
         })
@@ -65,7 +66,8 @@ class Horas_Turnos{
             estado: estado || data.estado,
           })
           .then(update => {
-            res.status(200).send({
+            res.status(200).json({
+              success: true,
               message: 'se cambie el estado a'+ estado,
               data: {
                 estado: estado || update.estado,
