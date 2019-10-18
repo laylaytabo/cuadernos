@@ -7,8 +7,11 @@ const{ Especialidades } = model;
 
 class Turno{
     static regist(req, res){
-        if( req.body.cantiFicha == "" || req.body.diasAten == "" || req.body.turno == "" ) {
-            res.status(400).send("Todos los campos son obligatorios")
+        if( /*req.body.cantiFicha == "" || */req.body.diasAten == "" || req.body.turno == "" ) {
+            res.status(400).json({
+                success: false,
+                message:"Todos los campos son obligatorios"
+            })
         }else{
             return Turnos
             .findAll({
@@ -46,7 +49,6 @@ class Turno{
             
         }
     }
-    
     static listTurnos(req, res){
         return Turnos
         .findAll()
@@ -69,13 +71,15 @@ class Turno{
           .findByPk(id)
           .then(turno => {
             if(!turno) {
-              return res.status(400).send({
-              message: 'NO hay nada que eliminar',
+              return res.status(400).json({
+                success:false,
+                message: 'NO hay nada que eliminar',
               });
             }
             return turno
               .destroy()
-              .then(() => res.status(200).send({
+              .then(() => res.status(200).json({
+                success: true,                 
                 message: 'Se elimino con exito'
               }))
               .catch(error => res.status(400).send(error));

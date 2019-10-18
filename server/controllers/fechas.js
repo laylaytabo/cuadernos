@@ -65,6 +65,7 @@ class Fecha {
             })
             .then(update => {
               res.status(200).send({
+                success:true,
                 message: 'Servcio actualizado',
                 data: {
                     fechaini: fechaini || update.fechaini,

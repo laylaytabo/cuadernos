@@ -21,10 +21,10 @@ class Especialidad{
           }
         }).then(nombre =>{
           if(nombre != null){
-            console.log("Fallo -> La especialidad ya existe!")
+            console.log("La especialidad ya existe!")
             res.status(400).json({
               success: false,
-              message:"Fallo -> La especialidad ya existe!"
+              message:"La especialidad ya existe!"
             });
           return;
           }else{
@@ -76,6 +76,7 @@ class Especialidad{
             })
             .then(update => {
               res.status(200).send({
+                success:true,
                 message: 'Servcio actualizado',
                 data: {
                   nombre: nombre || update.nombre,

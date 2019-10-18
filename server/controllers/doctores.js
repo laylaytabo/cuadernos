@@ -11,7 +11,10 @@ const { Consulta_especilaida } = model
 class Doctor{
     static regist(req, res){
         if(req.body.nombre == "" || req.body.especialidad == "" || req.body.turno == "" || req.body.sala == "" ){
-            res.status(400).send("Todos los campos son obligatorios")
+            res.status(400).json({
+                success: false,
+                message: "Todos los campos son obligatorios"
+            })
         }else{
             Consulta_especilaida.findAll({
                 where: {nombre: req.body.especialidad}
@@ -92,6 +95,7 @@ class Doctor{
                 })
                 .then(update => {
                   res.status(200).send({
+                    success: true,  
                     message: 'Servcio actualizado',
                     data: {
                         nombre: nombre || update.nombre,
