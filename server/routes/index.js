@@ -21,7 +21,7 @@ export default (app) => {
     app.get('/api/liscuaderno', Cuaderno.list);
     app.get('/api/OnlyCuadernos/:id', Cuaderno.OneCuaderno);
     app.post('/api/updateCuaderno/:id', Cuaderno.modifyC);
-
+    /*app.get('/api/allcuadernos' ,Cuaderno.allCuaderno)*/
     //doctor
     app.post('/api/doctor/:idCuaderno', Doctor.regist);
     app.get('/api/Alldoctor', Doctor.ListDoctores)
@@ -77,10 +77,12 @@ export default (app) => {
     app.post('/api/modifyEspCons/:id', ConsultaEsp.modifyEspCons); // esta ruta sirve para poder actualizar ne la tabla especialidad consulta
     app.get('/api/Esp_Turnos/:nombre/:dia/:turno',ConsultaEsp.List_Esp_Turnos)
     app.get('/api/nombreConsulta_especilidad/:nombre', ConsultaEsp.nombreConsulta_especilidad)// esta ruta es para poder sacar el id de una consulta especialidad por su nombre
+    app.get('/api/delturn/:id', ConsultaEsp.eliminarConsulta)/////eliminar consulta
 
     //ruta para consulta doctor
     app.post('/api/reg_doctor_especialidad/:id_especialidad', Doctor_consulta.reg_doctor_especialidad)
     app.get('/api/list_doctores_especialidad', Doctor_consulta.list_doctores_especialidad)
     app.get('/api/only_list_doctores_especialidad/:id_especialidad', Doctor_consulta.only_list_doctores_especialidad)
     app.get('/api/doctor_area/:id_medico', Doctor_consulta.doctor_area)
+    app.get('/api/delmedico/:id', Doctor_consulta.deldoc)//**eliminar medico de Hospitalizacion */
 }

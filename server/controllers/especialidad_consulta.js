@@ -137,6 +137,27 @@ class ConsultaEsp{
         res.status(200).json(one);
       });     
   }
+  ////////////*ruta elimanar consuntorios en especialidades*/
+  static eliminarConsulta(req,res){
+    return Consulta_especilaida
+      .findByPk(req.params.id)
+      .then(data => {
+        if(!data) {
+          return res.status(400).send({
+            success:false,
+            message: 'No funciona ',
+          });
+        }
+        return data
+          .destroy()
+          .then(() => res.status(200).json({
+            success:true,
+            message: 'Elimanadas Correctamente'
+          }))
+          .catch(error => res.status(400).send(error));
+        })
+        .catch(error => res.status(400).send(error))
+  }
 }
 
 export default ConsultaEsp;
