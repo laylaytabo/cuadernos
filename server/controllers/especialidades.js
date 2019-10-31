@@ -77,7 +77,7 @@ class Especialidad{
             .then(update => {
               res.status(200).send({
                 success:true,
-                message: 'Servcio actualizado',
+                msg: 'Servcio actualizado',
                 data: {
                   nombre: nombre || update.nombre,
                   sigla: sigla || update.sigla,
@@ -85,9 +85,21 @@ class Especialidad{
                 }
               })
             })
-            .catch(error => res.status(400).send(error));
+            .catch(error => {
+              console.log(error);
+              res.status(500).json({
+                success:false,
+                msg:"No se pudo actualizar los datos"
+              })
+            });
           })
-          .catch(error => res.status(400).send(error));
+          .catch(error => {
+            console.log(error);
+            res.status(500).json({
+              success:false,
+              msg:"No se pudo actualizar los datos"
+            })
+          });
       }
 
       

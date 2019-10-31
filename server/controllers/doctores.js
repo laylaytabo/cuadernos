@@ -37,8 +37,15 @@ class Doctor{
                     message: 'se inserto con exito',
                     data
                 }))
-                .catch(error => res.status(400).send(error));
-                })
+                .catch(error => {
+                    console.log(error)
+                    res.status(500).json({
+                        success:false,
+                        msg:"no se pudo insertar los datos",
+                        error
+                    })
+                });
+            })
             
         }
     }
