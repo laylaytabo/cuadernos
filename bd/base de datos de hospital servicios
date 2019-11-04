@@ -14,3 +14,4 @@ sequelize model:create --name horas_of_truno --attributes estado:boolean,hora:st
 
 sequelize model:create --name especialidad_doctor --attributes nombre_doctor:text,ci:integer,id_medico:integer,id_especialidad:integer
  
+sequelize model:create --name prueba_fechas --attributes fecha:string

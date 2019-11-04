@@ -125,6 +125,28 @@ class Doctor_consulta{
           res.status(200).json(data);
         });     
     }
+    /////eliminar medico doctor
+    ////////////*ruta elimanar consuntorios en especialidades*/
+    static deldoc(req,res){
+        return especialidad_doctor
+        .findByPk(req.params.id)
+        .then(data => {
+          if(!data) {
+            return res.status(400).send({
+              success:false,
+              message: 'No funciona ',
+            });
+          }
+        return data
+        .destroy()
+        .then(() => res.status(200).json({
+            success:true,
+            message: 'Elimanadas Correctamente'
+          }))
+          .catch(error => res.status(400).send(error));
+        })
+        .catch(error => res.status(400).send(error))
+    }
 }
 
 export default Doctor_consulta;

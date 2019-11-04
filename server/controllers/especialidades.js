@@ -37,7 +37,7 @@ class Especialidad{
             })
             .then(serviceData => res.status(200).send ({
                 success: true,
-                message: 'Servicio Creado Correctamente',
+                message: 'Especialidad creado correctamente',
                 serviceData
             }))
           }
@@ -128,6 +128,13 @@ class Especialidad{
         
       }).then(data => {
         res.status(200).send(data)
+      })
+    }
+    static allespeciali(req, res){
+      return Especialidades.findAll({
+        include:[{
+          model: Doctores
+        }]
       })
     }
 }

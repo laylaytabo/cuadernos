@@ -10,11 +10,25 @@ const { Consulta_especilaida } = model
 
 class Doctor{
     static regist(req, res){
-        if(req.body.nombre == "" || req.body.especialidad == "" || req.body.turno == "" || req.body.sala == "" ){
-            res.status(400).json({
-                success: false,
-                message: "Todos los campos son obligatorios"
-            })
+        console.log(req.body, " z<<<<")
+        if(!req.body.nombre || !req.body.TDoctor || !req.body.especialidad ){
+            if(!req.body.nombre ){
+                res.status(400).json({
+                    success: false,
+                    message: "Selecione medico"
+                })
+            }else if (!req.body.TDoctor){
+                res.status(400).json({
+                    success: false,
+                    message: "Selecione tipo de doctor"
+                })
+            }else if (!req.body.especialidad) {
+                res.status(400).json({
+                    success: false,
+                    message: "Selecione especialidad"
+                })
+            }
+            
         }else{
             Consulta_especilaida.findAll({
                 where: {nombre: req.body.especialidad}
@@ -112,9 +126,21 @@ class Doctor{
                     }
                   })
                 })
-                .catch(error => res.status(400).send(error));
+                .catch(error => {
+                    console.log(error)
+                    res.status(500).json({
+                        success:false,
+                        message:"No se pudo actualizar los datos"
+                    })
+                });
               })
-              .catch(error => res.status(400).send(error));
+                .catch(error => {
+                  console.log(error)
+                  res.status(500).json({
+                    success:false,
+                    message:"No se pudo actualizar los datos"
+                })
+              });
         })
       }
 

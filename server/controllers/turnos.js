@@ -18,30 +18,46 @@ class Turno{
                 where:{ idFechas: req.params.idFechas, diasAten: req.body.diasAten }
             })
             .then(data => {
-                console.log(data, "  <<<<<<<<<<<<<<<<<<<< esto")
-                 if(data == ""){
-                    const{ cantiFicha,diasAten, turno } = req.body
-                    const{ idFechas }= req.params
-                    return Turnos
-                    .create({
-        
-                        cantiFicha,
-                        diasAten, 
-                        turno,
-                        idFechas
-        
-                    }).then(data => res.status(200).send({
-        
-                        success: true,
-                        message: 'se inserto con exito',
-                        data
-        
-                    }))
-                    .catch(error => res.status(400).send(error));          
+                
+                 if(data.length < 3){
+                     var verify_turno
+                     for(var i = 0; i <data.length; i++){
+                         
+                        if( req.body.turno == data[i].turno ){
+                            verify_turno = "existe"
+                        }
+                    }
+                    if (verify_turno == "existe"){
+                        res.status(400).json({
+                            success:false,
+                            message:"En el dia "+req.body.diasAten+" ya se registro el turno "+req.body.turno 
+                        })
+                        verify_turno = ""
+                    }else{
+                        const{ cantiFicha,diasAten, turno } = req.body
+                        const{ idFechas }= req.params
+                        return Turnos
+                        .create({
+            
+                            cantiFicha,
+                            diasAten, 
+                            turno,
+                            idFechas
+            
+                        }).then(data => res.status(200).send({
+            
+                            success: true,
+                            message: 'se inserto con exito',
+                            data
+            
+                        }))
+                        .catch(error => res.status(400).send(error));  
+                    }
+                            
                 }else{
                     res.status(400).json({
                         success:false,
-                        message:"Ese dia "+req.body.diasAten+" ya esta registrado"
+                        message:"El dia "+req.body.diasAten+" ya esta registrado"
                     })
                 }
             })
