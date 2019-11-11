@@ -43,11 +43,10 @@ class Fechas_P{
     static list_fechas_creadas1(req,res){
         return prueba_fechas
         .findAll( {
-           where:{
-               createdAt:{
-                   [prueba_fechas.between]:['2019-11-04T00:00:00.000Z', '2019-11-05T00:00:00.000Z']
-               }
-           },
+           /* where:(
+            //prueba_fechas.fecha == "2019-02-15T00:00:00.000Z"
+            date('day',prueba_fechas.fecha) = '2019-02-15'
+           ), */
         } )
         .then(data => {
             res.status(200).json(data)
