@@ -1,5 +1,6 @@
 import model from '../models';
 const{Cuadernos} = model;
+const{Doctores} = model;
 class Cuaderno{
     static regist(req, res){
         if(req.body.titulo == "" || req.body.grupo == "" ){
@@ -14,10 +15,10 @@ class Cuaderno{
                 }
             }).then(cuader =>{
                 if(cuader != null){
-                    console.log("Fallo >> El Cuaderno ya existe...!")
+                    console.log("El Cuaderno ya existe")
                     res.status(400).json({
                         success:false,
-                        message:'Fallo >> El Cuaderno ya existe...!'
+                        message:'El Cuaderno ya existe'
                     })
                     return;
                 }else{
@@ -87,5 +88,7 @@ class Cuaderno{
             })
             .catch(error => res.status(400).send(error));
     }
+   
+
 }
 export default Cuaderno;

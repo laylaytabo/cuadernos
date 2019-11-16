@@ -37,7 +37,7 @@ class Especialidad{
             })
             .then(serviceData => res.status(200).send ({
                 success: true,
-                message: 'Servicio Creado Correctamente',
+                message: 'Especialidad creado correctamente',
                 serviceData
             }))
           }
@@ -77,7 +77,7 @@ class Especialidad{
             .then(update => {
               res.status(200).send({
                 success:true,
-                message: 'Servcio actualizado',
+                msg: 'Servcio actualizado',
                 data: {
                   nombre: nombre || update.nombre,
                   sigla: sigla || update.sigla,
@@ -85,9 +85,21 @@ class Especialidad{
                 }
               })
             })
-            .catch(error => res.status(400).send(error));
+            .catch(error => {
+              console.log(error);
+              res.status(500).json({
+                success:false,
+                msg:"No se pudo actualizar los datos"
+              })
+            });
           })
-          .catch(error => res.status(400).send(error));
+          .catch(error => {
+            console.log(error);
+            res.status(500).json({
+              success:false,
+              msg:"No se pudo actualizar los datos"
+            })
+          });
       }
 
       
@@ -116,6 +128,13 @@ class Especialidad{
         
       }).then(data => {
         res.status(200).send(data)
+      })
+    }
+    static allespeciali(req, res){
+      return Especialidades.findAll({
+        include:[{
+          model: Doctores
+        }]
       })
     }
 }
