@@ -43,11 +43,19 @@ class Fechas_P{
     static list_fechas_creadas1(req,res){
         return prueba_fechas
         .findAll( {
-           /* where:(
-            //prueba_fechas.fecha == "2019-02-15T00:00:00.000Z"
-            date('day',prueba_fechas.fecha) = '2019-02-15'
-           ), */
+           where:(
+            prueba_fechas.fecha >= "2019-02-15T00:00:00.000Z",
+            prueba_fechas.fecha < "2019-10-15T00:00:00.000Z"
+            //date('day',prueba_fechas.fecha) = '2019-02-15'
+           ),
+           
         } )
+        //select * from tsblr where fecha >  snd fecha <
+        /* .findAll({
+            where:{
+                [prueba_fechas.between]: [{id: 1}, {id: 10}]
+            }
+        }) */
         .then(data => {
             res.status(200).json(data)
 
