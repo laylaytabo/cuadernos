@@ -1,5 +1,5 @@
 import model from '../models';
-
+var sequelize = require("../models/index");
 const{ prueba_fechas } = model;
 
 class Fechas_P{
@@ -41,21 +41,16 @@ class Fechas_P{
         })
     }
     static list_fechas_creadas1(req,res){
-        return prueba_fechas
-        .findAll( {
-           where:(
-            prueba_fechas.fecha >= "2019-02-15T00:00:00.000Z",
-            prueba_fechas.fecha < "2019-10-15T00:00:00.000Z"
-            //date('day',prueba_fechas.fecha) = '2019-02-15'
-           ),
-           
-        } )
-        //select * from tsblr where fecha >  snd fecha <
-        /* .findAll({
-            where:{
-                [prueba_fechas.between]: [{id: 1}, {id: 10}]
-            }
-        }) */
+        var fecha = '2019-01-01'  
+              
+         return sequelize.sequelize.query(
+        `
+            SELECT id, fecha, "createdAt", "updatedAt"
+            FROM public.prueba_fechas 
+            where fecha >= '${fecha}'
+            and fecha <= '2019-02-01';
+
+        `)
         .then(data => {
             res.status(200).json(data)
 

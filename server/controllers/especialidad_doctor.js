@@ -108,7 +108,7 @@ class Doctor_consulta{
             where:{ id_especialidad : req.params.id_especialidad  }
         })
         .then((data) => {
-          res.status(200).json(data);
+            res.status(200).json(data);
         });     
     }
 
