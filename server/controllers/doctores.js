@@ -1,9 +1,13 @@
 import model from '../models';
-
+import Cuaderno from './cuadernos';
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 const{ Doctores } = model;
 const{ Fechas } = model;
 const{ Turnos } = model
 const{ Especialidades } = model;
+
+const { Cuadernos } = model;
 
 const { Consulta_especilaida } = model
  const { horas_of_truno } = model
@@ -177,7 +181,79 @@ class Doctor{
           res.status(200).send(users)
         })
     }
+    static filter_doctores(req, res) {
+        const { fecha_inicio, fecha_final }  = req.body
+        if(!fecha_final || !fecha_inicio){
+            res.status(400).json({
+                success:false,
+                msg:"Inserte fecha inicio y fecha final  para poder buscar un rago de fechas"
+            })
+        }else{
+            var _q = Doctores;
+            _q.findAll({
+            where: {[Op.and]: [{createdAt: {[Op.gte]: fecha_inicio }}, {createdAt: {[Op.lte]: fecha_final }}]},
+            })
+            .then(datas => {
+                if(datas == ""){
+                    res.status(400).json({
+                        success:false,
+                        msg:"No hay nada que mostrar"
+                    })
+                }else{
+                    res.status(200).json(datas)
+                }
+                
+            }); 
+        }
+        
+    
+    }
 
+    //ruta para poder mostrar doctores con su cuaderno
+    static ListDoctores_cuaderno(req, res){
+        return Doctores
+        .findAll({
+            include:[{
+                model:Cuadernos,
+                //where: { id :'2' }
+            }]
+
+        })
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
+    }
+
+    //ruta para filtrar
+    static filter_cuadernos(req, res) {
+        const { fecha_inicio, fecha_final }  = req.body
+        if(!fecha_final || !fecha_inicio){
+            res.status(400).json({
+                success:false,
+                msg:"Inserte fecha inicio y fecha final  para poder buscar un rago de fechas"
+            })
+        }else{
+            var _q = Doctores;            
+            _q.findAll({
+                include:[{                    
+                    model:Cuadernos,
+                    where: {[Op.and]: [{createdAt: {[Op.gte]: fecha_inicio }}, {createdAt: {[Op.lte]: fecha_final }}]}
+                }]
+            })
+            .then(datas => {
+                if(datas == ""){
+                    res.status(400).json({
+                        success:false,
+                        msg:"No hay nada que mostrar"
+                    })
+                }else{
+                    res.status(200).json(datas)
+                }
+                
+            }); 
+        }
+        
+    
+    }
     
 }
 export default Doctor;

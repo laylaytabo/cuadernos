@@ -15,3 +15,73 @@ sequelize model:create --name horas_of_truno --attributes estado:boolean,hora:st
 sequelize model:create --name especialidad_doctor --attributes nombre_doctor:text,ci:integer,id_medico:integer,id_especialidad:integer
  
 sequelize model:create --name prueba_fechas --attributes fecha:string
+
+////filtrar datos 
+ static filter_fechas_recetas(req, res) {
+        const { fecha_inicio, fecha_final, id_personal }  = req.body
+        if(!fecha_final || !fecha_inicio || ! id_personal){
+            res.status(400).json({
+                success:false,
+                msg:"Inserte fecha inicio y fecha final y el personal para poder buscar un rago de fechas"
+            })
+        }else{
+            var _q = receta_paciente;
+            _q.findAll({
+            where: {[Op.and]: [{id_user: {[Op.eq]: id_personal}}, {createdAt: {[Op.gte]: fecha_inicio }}, {createdAt: {[Op.lte]: fecha_final }}]},
+            })
+            .then(datas => {
+                if(datas == ""){
+                    res.status(400).json({
+                        success:false,
+                        msg:"No hay nada que mostrar"
+                    })
+                }else{
+                    res.status(200).json(datas)
+                }
+                
+            }); 
+        }
+        
+    
+    }
+    filter_list(req, res){
+    /* var _q = Personal;
+    _q.findAll({
+        where: {[Op.and]: [{cargo: {[Op.eq]: 'medico'}}, {createdAt: {[Op.gte]: '2019-11-26' }}, {createdAt: {[Op.lte]: '2019-11-26' }}]},
+    })
+    .then(datas => {
+        if(datas == ""){
+            res.status(400).json({
+                success:false,
+                msg:"No hay nada que mostrar"
+            })
+        }else{
+            res.status(200).json(datas)
+        }
+    }); */
+    
+     const { fecha_inicio, fecha_final, cargo }  = req.body
+    console.log(req.body, "  <<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+      if(!fecha_final || !fecha_inicio || !cargo){
+          res.status(400).json({
+              success:false,
+              msg:"Inserte fecha inicio y fecha final y el personal para poder buscar un rago de fechas"
+          })
+      }else{
+          var _q = Personal;
+          _q.findAll({
+              where: {[Op.and]: [{cargo: {[Op.eq]: cargo}}, {createdAt: {[Op.gte]: fecha_inicio }}, {createdAt: {[Op.lte]: fecha_final }}]},
+          })
+          .then(datas => {
+            console.log(datas, "  3333333333333333333333333333333333333333333")
+              if(datas == ""){
+                  res.status(400).json({
+                      success:false,
+                      msg:"No hay nada que mostrar"
+                  })
+              }else{
+                  res.status(200).json(datas)
+              }
+      });
+    } 
+  },1

@@ -64,6 +64,10 @@ export default (app) => {
 
     app.get( '/api/espTurno/:nombre/:dia/:turno', Especialidad.ListEspTurnos ); //esta ruta muestra todas las especialidades y sus turnos
 
+    app.get(' /api/one_esp_nombre/:nombre',Especialidad.one_esp_nombre)
+
+    //filtrar
+    app.post('/api/fitra_espe', Especialidad.filter_especi);///filtrar 
     //fechas
     app.post('/api/fechas/:id_doctor', Fecha.fechaPOst );
     app.get('/api/fechas', Fecha.listFechas);
@@ -94,4 +98,10 @@ export default (app) => {
     app.get('/fecha', fechas_prubas.list_fechas_creadas)
 
     app.get('/filter_fecha',fechas_prubas.list_fechas_creadas1)
+
+    app.post('/api/filtrar_cuader', Doctor.filter_cuadernos)///para filtrar cuadernos
+    app.get('/api/filter_doctor', Doctor.filter_doctores)////para filtart medicos 
+    
+    app.get('/api/lista_doctores_cuadernos', Doctor.ListDoctores_cuaderno);
+
 }

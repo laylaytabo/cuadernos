@@ -33,7 +33,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-sequelize.query(`SELECT id, fecha, "createdAt", "updatedAt"
+/*sequelize.query(`SELECT id, fecha, "createdAt", "updatedAt"
         FROM public.prueba_fechas 
         where fecha >= '2018-04-01'
         and fecha < '2019-05-01';`)
@@ -41,5 +41,5 @@ sequelize.query(`SELECT id, fecha, "createdAt", "updatedAt"
             console.log(data);
 
         })
-
+*/
 module.exports = db;
