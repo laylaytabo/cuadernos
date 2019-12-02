@@ -1,4 +1,6 @@
 import model from '../models';
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 const{Cuadernos} = model;
 const{Doctores} = model;
 class Cuaderno{
@@ -88,6 +90,7 @@ class Cuaderno{
             })
             .catch(error => res.status(400).send(error));
     }
+    
    
 
 }
