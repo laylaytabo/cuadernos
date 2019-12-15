@@ -20,7 +20,7 @@ class Cuaderno{
                     console.log("El Cuaderno ya existe")
                     res.status(400).json({
                         success:false,
-                        message:'El Cuaderno ya existe'
+                        message:'El Cuaderno'+' '+req.body.titulo+' '+ 'ya existe'
                     })
                     return;
                 }else{
@@ -35,7 +35,7 @@ class Cuaderno{
                         
                     }).then(data => res.status(200).json({
                         success: true,
-                        message: 'Se inserto con exito',
+                        message: 'Datos Ingresados Correctamente.',
                         data
                     }))
                     .catch(error => res.status(400).send(error));
@@ -91,7 +91,17 @@ class Cuaderno{
             .catch(error => res.status(400).send(error));
     }
     
-   
+    // one cuaderno
+    static one_cuaderno(req, res){
+        const { id_cuaderno } = req.params
+        console.log(id_cuaderno, "   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        return Cuadernos
+        .findAll({
+            where:{ id : id_cuaderno }
+        })
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
+    }
 
 }
 export default Cuaderno;

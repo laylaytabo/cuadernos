@@ -25,7 +25,7 @@ class Especialidad{
             console.log("La especialidad ya existe!")
             res.status(400).json({
               success: false,
-              message:"La especialidad ya existe!"
+              message:"La especialidad "+ " "+ req.body.nombre +" " + "ya existe!"
             });
           return;
           }else{
@@ -38,7 +38,7 @@ class Especialidad{
             })
             .then(serviceData => res.status(200).send ({
                 success: true,
-                message: 'Especialidad creado correctamente',
+                message: 'Especialidad creada correctamente',
                 serviceData
             }))
           }
@@ -78,7 +78,7 @@ class Especialidad{
             .then(update => {
               res.status(200).send({
                 success:true,
-                msg: 'Servcio actualizado',
+                message: 'Servcio actualizado',
                 data: {
                   nombre: nombre || update.nombre,
                   sigla: sigla || update.sigla,
@@ -90,7 +90,7 @@ class Especialidad{
               console.log(error);
               res.status(500).json({
                 success:false,
-                msg:"No se pudo actualizar los datos"
+                message:"No se pudo actualizar los datos"
               })
             });
           })
@@ -98,7 +98,7 @@ class Especialidad{
             console.log(error);
             res.status(500).json({
               success:false,
-              msg:"No se pudo actualizar los datos"
+              message:"No se pudo actualizar los datos"
             })
           });
       }
