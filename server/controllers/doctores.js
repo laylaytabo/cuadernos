@@ -19,17 +19,17 @@ class Doctor{
             if(!req.body.nombre ){
                 res.status(400).json({
                     success: false,
-                    message: "Selecione medico"
+                    message: "Seleccione Médico"
                 })
             }else if (!req.body.TDoctor){
                 res.status(400).json({
                     success: false,
-                    message: "Selecione tipo de doctor"
+                    message: "Seleccione tipo de Médico"
                 })
             }else if (!req.body.especialidad) {
                 res.status(400).json({
                     success: false,
-                    message: "Selecione especialidad"
+                    message: "Seleccione Consultorio Especialidad"
                 })
             }
             
@@ -52,7 +52,7 @@ class Doctor{
 
                 }).then(data => res.status(200).send({
                     success: true,
-                    message: 'se inserto con exito',
+                    message: 'Datos Ingresados Correctamente.',
                     data
                 }))
                 .catch(error => {
@@ -132,7 +132,7 @@ class Doctor{
                 .then(update => {
                   res.status(200).send({
                     success: true,  
-                    message: 'Servcio actualizado',
+                    message: 'Asiganción actualizado',
                     data: {
                         nombre: nombre || update.nombre,
                         TDoctor: TDoctor || update.TDoctor,
@@ -264,6 +264,17 @@ class Doctor{
         }
         
     
+    }
+    // medico solo uno
+   
+    static one_Medico(req, res){
+        const {id}=req.params
+        return Doctores
+        .findAll({
+            where:{id : id}
+        })
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
     }
     
 }

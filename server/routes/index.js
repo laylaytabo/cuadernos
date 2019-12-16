@@ -24,6 +24,8 @@ export default (app) => {
     app.get('/api/liscuaderno', Cuaderno.list);
     app.get('/api/OnlyCuadernos/:id', Cuaderno.OneCuaderno);
     app.post('/api/updateCuaderno/:id', Cuaderno.modifyC);
+    app.get('/api/one_cuaderno/:id_cuaderno', Cuaderno.one_cuaderno)
+
     /*app.get('/api/allcuadernos' ,Cuaderno.allCuaderno)*/
     //doctor
     app.post('/api/doctor/:idCuaderno', Doctor.regist);
@@ -34,6 +36,7 @@ export default (app) => {
 
     app.get('/api/doctTurnos/:id', Doctor.doctorTurnos); // ruta para poder mostrar de los doctore  su turno
     app.get('/api/docAllData/:id', Doctor.docAllData); 
+    app.get('/api/one_medico/:id', Doctor.one_Medico); 
 
     app.get('/api/list_cons_doc/:id_esp_consultorio', Doctor.list_doc_esp); //  ruta para poder  listar los docotores segun consultorio
 
