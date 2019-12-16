@@ -74,6 +74,17 @@ class Doctor{
         .then(data => res.status(200).send(data))
         .catch(error => res.status(400).send(error));
     }
+     //mostrar lista de doctores por consultorio
+     static list_doc_esp(req, res){
+        const { id_esp_consultorio } = req.params
+        return Doctores
+        .findAll({
+            where:{ id_ConsultaEspecialidad: id_esp_consultorio }
+        })
+        .then(data => res.status(200).send(data))
+        .catch(error => res.status(400).send(error));
+    }
+    
     //ruta para sacar doctor segun idCuaderno
     static list(req, res){
         var id = req.params.id;  
