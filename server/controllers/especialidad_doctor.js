@@ -134,14 +134,14 @@ class Doctor_consulta{
           if(!data) {
             return res.status(400).send({
               success:false,
-              message: 'No funciona ',
+              msg: 'No funciona ',
             });
           }
         return data
         .destroy()
         .then(() => res.status(200).json({
             success:true,
-            message: 'Elimanadas Correctamente'
+            msg: 'Elimanado Correctamente'
           }))
           .catch(error => res.status(400).send(error));
         })
