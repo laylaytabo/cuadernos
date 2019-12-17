@@ -38,7 +38,8 @@ export default (app) => {
     app.get('/api/docAllData/:id', Doctor.docAllData); 
     app.get('/api/one_medico/:id', Doctor.one_Medico); 
 
-    
+    app.get('/api/list_cons_doc/:id_esp_consultorio', Doctor.list_doc_esp); //  ruta para poder  listar los docotores segun consultorio
+
     //turnos
     app.post('/api/turnos/:idFechas', Turno.regist);
     app.get('/api/ListTurnos', Turno.listTurnos);
