@@ -47,7 +47,7 @@ class Turno{
                         }).then(data => res.status(200).send({
             
                             success: true,
-                            message: 'se inserto con exito',
+                            message: 'Datos Ingresados Correctamente.',
                             data
             
                         }))
